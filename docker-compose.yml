@@ -2,9 +2,9 @@ version: '3.1'
 
 services:
   springboot:
-    image: dockerhandson/spring-boot-mongo:latest
+    image: emortoo/springboot-app:v2
     restart: always # This will be ignored if we deploy in docker swarm
-    container_name: springboot
+    container_name: spring-boot-app
     environment:
     - MONGO_DB_HOSTNAME=mongo
     - MONGO_DB_USERNAME=root

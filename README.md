@@ -19,14 +19,41 @@ Create docker image using Dockerfile
 
 
 ```docker
-docker build -t your-repo-name/spring-boot-mongo .
+docker build -t your-repo-name/springboot-app .
 ```
 
-## Deploy Application Using Docker Compose 
+## Create Docker Network
+```docker
+docker network create spring-network
+```
+
+## Pull Mongo image
+```docker
+docker pull mongo
+```
+
+## Deploy Application Using Docker
+
+#### Springboot App
+
+```Docker
+docker run --name springboot-app -d -p 3000:8080 --network spring-network -d \
+    -e MONGO_DB_USERNAME=root \
+    -e MONGO_DB_PASSWORD=admin123 \
+    -e MONGO_DB_HOSTNAME=mongodb springboot-app 
+``` 
+
+#### Mongo DB
+
+```Docker
+docker run --name mongodb -d --network spring-network -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=admin123 mongo
+```
+
+<!-- ## Deploy Application Using Docker Compose 
 
 ```docker-compose 
 docker-compose up -d 
-```
+``` -->
 
 ## List Docker Containers
 ```docker
